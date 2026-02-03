@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+'''Մուտքագրել երեք թիվ։ Տպել նրանցից առավելագույնը։
+Մուտքագրել երեք թիվ։ Տպել նրանցից նվազագույնը։
+Մուտքագրել երեք թիվ։ Տպել նրանց դասավորված աճման կարգով։'''
 '''1-2-3
 nums=[]
 for i in range(3):
@@ -9,6 +12,9 @@ print(f"max_num = {max(nums)}")
 print(f"min_num = {min(nums)}")
 print(f"min to max = {sorted(nums)}")
 '''
+'''Մուտքագրել երեք թիվ։ Տպել նրանցից առավելագույնը։
+Մուտքագրել երեք թիվ։ Տպել նրանցից նվազագույնը։
+Մուտքագրել երեք թիվ։ Տպել նրանց դասավորված աճման կարգով։'''
 '''1-2-3
 a=int(input("Mutqagrir tiv 1/3: "))
 b=int(input("Mutqagrir tiv 2/3: "))
@@ -33,6 +39,8 @@ else:
     else:
         print(f"max to min = {c,b,a}")
 '''
+'''Մուտքագրել թիվ։ Տպել Fizz, եթե այն բաժանվում է 3ի, Buzz, եթե այն բաժանվում է 5ի և FizzBuzz եթե այն բաժանվում է և 3ի և 5ի։
+'''
 '''4
 num=input("Input a number: ")
 if num.isdigit():
@@ -47,6 +55,8 @@ if num.isdigit():
         print("Try a different number: ")
 else:
     print("Icorrect input!!")
+'''
+'''Մուտքագրել եռանիշ թիվ։ Տպել Yes, եթե նրա հարյուրավորն ավելի մեծ է քան միավորը, հակառակ դեպքում տպել No.
 '''
 '''5
 num=input("Enter a three-digit num: ")
