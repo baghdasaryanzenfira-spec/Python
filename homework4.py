@@ -36,3 +36,23 @@
 #        print(word[::-1].upper())
 
 #4
+#num = int(input("Enter a number: "))
+#msum = 0
+#while num > 0:
+#msum += num % 10
+#   num = num // 10
+#if msum > 10:
+#   print("Yes")
+
+#5
+#while True:
+#   word = input("Enter a word: ").lower()
+#   if word == 'stop':
+#       print("The End!")
+#       break
+#   if word[0] == word[-1]:
+#       print(word.upper())
+
+
+
+#4
