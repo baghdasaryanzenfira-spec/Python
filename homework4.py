@@ -53,6 +53,3 @@
 #   if word[0] == word[-1]:
 #       print(word.upper())
 
-
-
-#4
