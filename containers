@@ -29,13 +29,14 @@
  #4
  #nstr=[]
  #while True:
- #	num=input("Enter a number: ('stop'=end): ").lower()
- #	if num=="done":
- #    	break
- #	if not num.isdigit():
- #    	print("I said a number!")
- #    	exit()
- #	nstr.append(num)
+ #	   num=input("Enter a number: ('stop'=end): ").lower()
+ #	   if num=="done":
+ #    	   break
+ #	   if not num.isdigit():
+ #    	   print("I said a number!")
+ #    	   exit()
+ #     num=int(num)
+ #	    nstr.append(num)
  #print(sorted(nstr))
 
  #5
