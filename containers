@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
  #1
  #n=input("Enter a number: ")
  #if not n.isdigit():
