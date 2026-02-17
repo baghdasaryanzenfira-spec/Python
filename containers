@@ -19,9 +19,12 @@
 #print(a)
 
 #3
-#sentence=input("Enter a sentence: ")
-#letters=set(sentence)
-#print(letters)
+sentence=input("Enter a sentence: ")
+alpha=[]
+for i in sentence:
+    if i.isalpha() and i not in alpha:
+        alpha+=i
+print(alpha)
 
 #4
 #nstr=[]
