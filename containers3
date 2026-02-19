@@ -1,0 +1,73 @@
+#!/usr/bin/python3
+#1
+#sentence=input("Input a sentence: ")
+#ml=""
+#long=""
+#for word in sentence.split():
+#    if len(word)>len(long):
+#        long=word
+#print(long)
+#mmax=0
+#for letter in long:
+#    if letter.isalpha():
+#        count=0
+#        for i in long:
+#            if letter==i:
+#                count+=1
+#        if count>mmax:
+#            mmax=count
+#            ml=letter
+#print(ml)
+
+#2
+#sentence=input("Input a sentence: ")
+#ml=[]
+#for i in sentence:
+#    if i.isalpha() and sentence.count(i)==1:
+#        ml.append(i)
+#print(ml)
+
+#3
+#sentence=input("Inputa sentence: ").lower()
+#ml=""
+#for i in sentence:
+#    if 'a'<=i<='z' and i not in ml:
+#        ml+=i
+#if len(ml)==26:
+#    print("Yes")
+#else:
+#    print("No")
+
+#4
+#vowels="aeiou"
+#ml=[]
+#nl=[]
+#while True:
+#    word=input("Input a word: ").lower()
+#    if word.isalpha():
+#        if word=='stop':
+#            break
+#        if word[0] in vowels:
+#            ml.append(word)
+#        else:
+#            nl.append(word)
+#    else:
+#        continue
+#print(ml)
+#print(nl)
+
+#5
+#nl=[]
+#while True:
+#    nums=input("Enter a numbers: ")
+#    if nums=='stop':
+#        break
+#    if nums.isdigit():
+#        if len(nums)==3:
+#            nl.append(nums)
+#        else:
+#            continue
+#    else:
+#        continue
+#print(sorted(nl))
+            
