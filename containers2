@@ -1,1 +1,59 @@
+#!/usr/bin/python3
+#1
+#nums=[1,2,3,4,5,6,7,8,9]
+#even=[]
+#odd=[]
+#for i in nums:
+#    if i%2==0:
+#        even.append(i)
+#    elif i%2!=0:
+#        odd.append(i)
+#print(nums)
+#print(even+odd)
 
+#2
+#nums=[x for x in range(1,15)]
+#target=8
+#print(nums)
+#for h in nums:
+#    nv=target-h
+#    if nv in nums and nums.index(nv)!=nums.index(h):
+#        print(nums.index(h),nums.index(nv))
+#        continue
+
+#3
+#sentence=input("Input a sentence: ")
+#ml=""
+#mmax=0
+#for i in sentence:
+#    if i.isalpha():
+#        count=0
+#        for letter in sentence:
+#            if letter==i:
+#                count+=1
+#        if count>mmax:
+#            mmax=count
+#            ml=i
+#print(ml)
+
+#4
+#sentence=input("Input a sentence: ")
+#ml=[]
+#for i in sentence.split():
+#    if i.isalpha() and len(i)>=4:
+#        ml.append(i)
+#    else:
+#        continue
+#new_sentence=",".join(ml)
+#print(new_sentence)
+
+#5
+sentence=input("Input a sentence: ")
+ml=[]
+for i in sentence.split():
+    if i.isalpha():
+        ml.append(i[::-1])
+    else:
+        continue
+new_sentence=" ".join(ml)
+print(new_sentence)
