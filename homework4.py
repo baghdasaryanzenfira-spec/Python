@@ -45,11 +45,11 @@
 #   print("Yes")
 
 #5
-#while True:
-#   word = input("Enter a word: ").lower()
-#   if word == 'stop':
-#       print("The End!")
-#       break
-#   if word[0] == word[-1]:
-#       print(word.upper())
+while True:
+   word = input("Enter a word: ").lower()
+   if word == 'stop':
+       print("The End!")
+       break
+   if word[0] == word[-1]:
+       print(word.upper())
 

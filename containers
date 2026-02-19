@@ -19,12 +19,12 @@
 #print(a)
 
 #3
-sentence=input("Enter a sentence: ")
-alpha=[]
-for i in sentence:
-    if i.isalpha() and i not in alpha:
-        alpha+=i
-print(alpha)
+#sentence=input("Enter a sentence: ")
+#alpha=[]
+#for i in sentence:
+#    if i.isalpha() and i not in alpha:
+#        alpha+=i
+#print(alpha)
 
 #4
 #nstr=[]
@@ -52,13 +52,14 @@ print(alpha)
 #print(mstr)
 
 #8
-#for x in range(100,1000):
-#    hundreds=x//100
-#    tens=(x//10)%10
-#    ones=x%10
-#    msum=hundreds+tens+ones
-#    if msum>10:
-#        print(x)
+#for i in range(100,1000):
+#    s=0
+#    idx=i
+#    while idx>0:
+#        s+=idx%10
+#        idx//=10
+#    if s>10:
+#        print(i)
 
 #9
 #n=int(input("Enter a number: "))
@@ -76,6 +77,10 @@ print(alpha)
 #10
 sentence=input("Enter a sentence: ")
 words=sentence.split()
+for i in words:
+    if i.isdigit():
+        print("There are no words! ")
+        exit()
 if words:
     long=words[0]
     for word in words:
