@@ -52,7 +52,7 @@
 #print(sen2)
 
 #5
-#gn={"Anna":"15","Mher":"20","Davit":"19","Aida":"19"}
+#gn={"Anna":15,"Mher":20,"Davit":19,"Aida":19}
 #students=sorted(gn, key=gn.get, reverse=True)
 #three=students[:3]
 #print("All",gn)
