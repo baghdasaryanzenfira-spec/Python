@@ -1,0 +1,59 @@
+#!/usr/bin/python3
+#1
+#emails=["arman@mail.ru","zenfira@gmail.com","anna@mail.ru","davit@outlook.com"]
+#group={}
+#for email in emails:
+#    domain=email.split('@')[1]
+#    if domain not in group:
+#        group[domain]=[]
+#    group[domain].append(email)
+#print(group)
+
+#2
+#numbers=["043190810","041414141","098888888","093111111","055555555",]
+#providers={"Viva":["093","098"],"Beeline":["043","041"],"Ucom":["055"]}
+#final={}
+#for i in providers:
+#    final[i]=[]
+#for num in numbers:
+#    code=num[:3]
+#    for i,codes in providers.items():
+#        if code in codes:
+#            final[i].append(num)
+#print(final)
+
+#3
+#sentence=input("Input a sentence: ")
+#counts={}
+#for i in sentence:
+#    if i in counts:
+#        counts[i]+=1
+#    else:
+#        counts[i]=1
+#for i in counts:
+#    print(i,"---",counts[i])
+
+#4
+#ml=input("Sentence: ")
+#nl=input("Sentence: ")
+#sen1=[]
+#sen2=[]
+#for i in ml:
+#    if i in ml and i not in nl:
+#        if i in sen1:
+#            continue
+#        sen1.append(i)
+#for j in nl:
+#    if j in nl and j not in ml:
+#        if j in sen2:
+#            continue
+#        sen2.append(j)
+#print(sen1)
+#print(sen2)
+
+#5
+#gn={"Anna":15,"Mher":20,"Davit":19,"Aida":19}
+#students=sorted(gn, key=gn.get, reverse=True)
+#three=students[:3]
+#print("All",gn)
+#print("Top 3",three)

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 #1
+<<<<<<< HEAD
 #nums=[12,3,5,2,78,4,34,0,192,23]
 #ml=[]
 #nl=[]
@@ -14,16 +15,41 @@
 #2
 #nums=[x for x in range(1,15)]
 #target=25
+=======
+#nums=[1,2,3,4,5,6,7,8,9]
+#even=[]
+#odd=[]
+#for i in nums:
+#    if i%2==0:
+#        even.append(i)
+#    elif i%2!=0:
+#        odd.append(i)
+#print(nums)
+#print(even+odd)
+
+#2
+#nums=[x for x in range(1,15)]
+#target=8
+>>>>>>> refs/remotes/origin/main
 #print(nums)
 #for h in nums:
 #    nv=target-h
 #    if nv in nums and nums.index(nv)!=nums.index(h):
+<<<<<<< HEAD
 #        print(nums.index(nv),nums.index(h))
 #        continue
 
 #3
 #sentence=input("Enter a sentence: ").lower()
 #ml=[]
+=======
+#        print(nums.index(h),nums.index(nv))
+#        continue
+
+#3
+#sentence=input("Input a sentence: ")
+#ml=""
+>>>>>>> refs/remotes/origin/main
 #mmax=0
 #for i in sentence:
 #    if i.isalpha():
@@ -33,6 +59,7 @@
 #                count+=1
 #        if count>mmax:
 #            mmax=count
+<<<<<<< HEAD
 #            ml.append(i)
 #print(ml)
 
@@ -42,12 +69,24 @@
 #for i in sentence.split():
 #    if i.isalpha() and len(i)>=4:
 #            ml.append(i)
+=======
+#            ml=i
+#print(ml)
+
+#4
+#sentence=input("Input a sentence: ")
+#ml=[]
+#for i in sentence.split():
+#    if i.isalpha() and len(i)>=4:
+#        ml.append(i)
+>>>>>>> refs/remotes/origin/main
 #    else:
 #        continue
 #new_sentence=",".join(ml)
 #print(new_sentence)
 
 #5
+<<<<<<< HEAD
 #sentence=input("Enter a sentence: ")
 #ml=[]
 #for i in sentence.split():
@@ -57,3 +96,14 @@
 #        continue
 #new_sentence=" ".join(ml)
 #print(new_sentence)
+=======
+sentence=input("Input a sentence: ")
+ml=[]
+for i in sentence.split():
+    if i.isalpha():
+        ml.append(i[::-1])
+    else:
+        continue
+new_sentence=" ".join(ml)
+print(new_sentence)
+>>>>>>> refs/remotes/origin/main

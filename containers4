@@ -1,0 +1,59 @@
+#!/usr/bin/python3
+
+#1
+#n=input("Enter a number: ")
+#if not n.isdigit():
+#    print("I said a number: ")
+#    exit()
+#n=int(n)
+#a=0
+#b=1
+#for i in range(n):
+#    print(a)
+#    a,b=b,a+b
+
+#2
+#n=int(input("Enter a number: "))
+#m=int(input("Enter a number: "))
+#if n>m:
+#    n,m=m,n
+#for num in range(n, m+1):
+#    if num>1:
+#        prime=True
+#        for i in range(2,num):
+#            if num%i==0:
+#                prime=False
+#                break
+#        if prime:
+#            print(num)
+
+#3
+#sentence=input("Input a sentence: ")
+#ml=[]
+#for i in sentence:
+#    if i.isalpha() and i not in "aeiou":
+#        ml.append(i)
+#print(ml[::-1])
+
+#4
+#data=[1,[2,3],4,[5,6,7],8]
+#total=0
+#for i in data:
+#    if isinstance(i,list):
+#        for x in i:
+#            if isinstance(x,(int,float)):
+#                total+=x
+#    elif isinstance(i,(int,float)):
+#        total+=i
+#print(total)
+
+#5
+#sentence=input("Input a sentence: ")
+#letter=input("Enter a letter: ")
+#nl=[]
+#ml=sentence.split()
+#for i in ml:
+#    if i.isalpha() and letter.isalpha():
+#        if letter.lower() in i.lower():
+#            nl.append(i)
+#print(nl)

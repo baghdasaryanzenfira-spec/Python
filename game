@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+import random
+questions = [
+    "What is the capital of France?Paris,Madrid,Berlin,Moscow",
+    "What is 2+2?4,2,6,10",
+    "What is the nationality of Napoleon?France,Germany,Spain,Armenia",
+    "What color is the sky?Blue,Green,Red,Yellow",
+    "What is the largest planet?Jupiter,Earth,Mars,Venus",
+    "Which ocean is the biggest?Pacific,Atlantic,Indian,Arctic",
+    "How many days are in a week?7,5,10,8",
+    "What is the boiling point of water?100,90,80,70",
+    "Which animal barks?Dog,Cat,Cow,Horse",
+    "Which season is the coldest?Winter,Summer,Spring,Autumn",
+    "Which country is famous for pizza?Italy,France,Germany,China",
+    "Which gas do humans breathe?Oxygen,Hydrogen,Carbon,Helium",
+    "What is 10*10?100,10,20,50",
+    "Which fruit is yellow?Banana,Apple,Cherry,Grape",
+    "Which metal is liquid?Mercury,Iron,Gold,Silver",
+    "What is the fastest land animal?Cheetah,Lion,Tiger,Dog",
+    "Which instrument has keys?Piano,Guitar,Drum,Flute",
+    "What is the square root of 16?4,2,8,6",
+    "Which planet is known as the Red Planet?Mars,Earth,Saturn,Neptune"
+]
+selected=random.sample(questions,10)
+score=0
+for q in selected:
+    parts=q.split("?")
+    question=parts[0]
+    answers=parts[1].split(",")
+    correct_answer=answers[0]
+    random.shuffle(answers)
+    print()
+    print(question+"?")
+    for i in range(4):
+        print(f"{i+1}.{answers[i]}")
+    player=int(input("Choose right answer: "))
+    if answers[player-1]==correct_answer:
+        print("Correct!!!")
+        score+=1
+    else:
+        print(f"Wrong answer! {correct_answer}")
+print("Game over!")
+print("You answered",score,"/10")
