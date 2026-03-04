@@ -39,5 +39,5 @@ for q in selected:
         score+=1
     else:
         print(f"Wrong answer! {correct_answer}")
-print("Game over!")
+print("Game over!...!")
 print("You answered",score,"/10")
