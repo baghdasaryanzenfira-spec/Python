@@ -1,0 +1,121 @@
+#!/usr/bin/python3
+text="   Hello world "
+text1="Hello World "
+
+#1 
+def my_split(mstr):
+    """Split() funkciayi irakanacum: """
+    lst=[]
+    temp=""
+    for i in mstr:
+        if i==" ":
+            lst.append(temp)
+            temp=""
+        else:
+            temp+=i
+    lst.append(temp)
+    return lst
+print(my_split(text))
+
+#2 
+def my_strip(mstr):
+    """Strip() funkciayi irakanacum: """
+    start=0
+    end=len(mstr)-1
+    while start<=end and mstr[start]==" ":
+        start+=1
+    while end>=start and mstr[end]==" ":
+        end-=1
+    return ''.join(mstr[i] for i in range(start,end+1))
+print(my_strip(text))
+
+#3
+def my_replace(s,old,new):
+    """replace() funkciayi irakanacum: """
+    result=""
+    i=0
+    while i<len(s):
+        if s[i:i+len(old)]==old:
+            result+=new
+            i+=len(old)
+        else:
+            result+=s[i]
+            i+=1
+    return result
+print(my_replace(text,"world","Python"))
+
+#4
+def capitalize(mstr):
+    """capitalize() funkciayi irakanacum: """
+    if not mstr:
+        return ""
+    first=mstr[0]
+    if 'a'<= first <='z':
+        first=chr(ord(first)-32)
+    ml=""
+    for i in mstr[1:]:
+        if 'A'<= i<='Z':
+            ml+=chr(ord(i)+32)
+        else:
+            ml+=i
+    return first+ml
+print(capitalize(text1))
+
+#5
+def my_title(mstr):
+    """title() funkciayi irakanacum: """
+    ml=""
+    nl=""
+    for i in mstr:
+        if 'a'<= i <='z' and (nl==' '):
+            ml+=chr(ord(i)-32)
+        elif 'A'<= i <= 'Z'and (nl!=' '):
+            ml+=chr(ord(i)+32)
+        else:
+            ml+=i
+        nl=i
+    return ml
+print(my_title(text))
+
+#6
+def my_upper(mstr):
+    ml=""
+    for i in mstr:
+        if 'a'<=i<='z':
+            ml+=chr(ord(i)-32)
+        else:
+            ml+=i
+    return ml
+print(my_upper(text))
+
+#7
+def my_lower(mstr):
+    ml=""
+    for i in mstr:
+        if 'A'<=i<='Z':
+            ml+=chr(ord(i)+32)
+        else:
+            ml+=i
+    return ml
+print(my_lower(text))
+
+#8
+def my_reverse(s):
+    ml=""
+    for i in range(len(s)-1,-1,-1):
+        ml+=s[i]
+    return ml
+print(my_reverse(text1))
+
+#9
+def is_palindrome(s):
+    return my_reverse(s)==s
+print(is_palindrome(text1))
+
+#10
+def my_isdigit(s):
+    for i in s:
+        if i<'0' or i>'9':
+            return False
+    return True
+print(my_isdigit("abc"))

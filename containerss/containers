@@ -75,17 +75,17 @@
 #        print(f"{i},Fizz")
 
 #10
-sentence=input("Enter a sentence: ")
-words=sentence.split()
-for i in words:
-    if i.isdigit():
-        print("There are no words! ")
-        exit()
-if words:
-    long=words[0]
-    for word in words:
-        if len(word)>len(long):
-            long=word
-    print(long)
-else:
-    print("Empty")
+#sentence=input("Enter a sentence: ")
+#words=sentence.split()
+#for i in words:
+#    if i.isdigit():
+#        print("There are no words! ")
+#        exit()
+#if words:
+#    long=words[0]
+#    for word in words:
+#        if len(word)>len(long):
+#            long=word
+#    print(long)
+#else:
+#    print("Empty")
