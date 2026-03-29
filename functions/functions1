@@ -119,3 +119,11 @@ def my_isdigit(s):
             return False
     return True
 print(my_isdigit("abc"))
+
+def f(*args):
+    s=0
+    for i in args:
+        if type(i)==int:
+            s+=i
+    print(s)
+f(10,"nksnv",20)

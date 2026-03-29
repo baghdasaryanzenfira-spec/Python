@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+people = [
+    "Anna, Petrosyan,25,Designer,1200",
+    "Arman, Sargsyan,30,Programmer,2000",
+    "Mariam, Hakobyan,22,Student,500",
+    "David, Grigoryan,40,Engineer,1800",
+    "Lilit, Karapetyan,28,Teacher,900"
+]
+def parse_person(persons):
+        name,surname,age,prof,salary=persons.split(",")
+        return {
+                "name":name,
+                "surname":surname,
+                "age":int(age),
+                "prof":prof,
+                "salary":int(salary)
+                }
+people_dicts=[parse_person(p) for p in people]
+
+def get_oldest_person(people_dicts):
+    oldest=max(people_dicts,key=lambda x: x["age"])
+    return oldest
+oldest=get_oldest_person(people_dicts)
+print(oldest)
+
+def get_highest_salary_person(people_dicts):
+    higher=max(people_dicts,key=lambda x: x["salary"])
+    return higher
+higher=get_highest_salary_person(people_dicts)
+print(higher)
+
+def order_people_by_name(person_dict):
+    return sorted(people_dicts,key=lambda x: x["name"])
+order_people=order_people_by_name(people_dicts)
+print(order_people)
+
+def get_person_by_profession(people_list,profession):
+    for p in people_list:
+        if p["prof"].lower()==profession.lower():
+            return p
+    return None
+engineer=get_person_by_profession(people_dicts,"Engineer")
+print(engineer)
