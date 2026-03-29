@@ -1,0 +1,99 @@
+#!/usr/bin/python3
+import random
+
+questions = [
+    "What is the capital of France?Paris,Madrid,Berlin,Moscow",
+    "What is 2+2?4,2,6,10",
+    "What is the nationality of Napoleon?France,Germany,Spain,Armenia",
+    "What color is the sky?Blue,Green,Red,Yellow",
+    "What is the largest planet?Jupiter,Earth,Mars,Venus",
+    "Which ocean is the biggest?Pacific,Atlantic,Indian,Arctic",
+    "How many days are in a week?7,5,10,8",
+    "What is the boiling point of water?100,90,80,70",
+    "Which animal barks?Dog,Cat,Cow,Horse",
+    "Which season is the coldest?Winter,Summer,Spring,Autumn",
+    "Which country is famous for pizza?Italy,France,Germany,China",
+    "Which gas do humans breathe?Oxygen,Hydrogen,Carbon,Helium",
+    "What is 10*10?100,10,20,50",
+    "Which fruit is yellow?Banana,Apple,Cherry,Grape",
+    "Which metal is liquid?Mercury,Iron,Gold,Silver",
+    "What is the fastest land animal?Cheetah,Lion,Tiger,Dog",
+    "Which instrument has keys?Piano,Guitar,Drum,Flute",
+    "What is the square root of 16?4,2,8,6",
+    "Which planet is known as the Red Planet?Mars,Earth,Saturn,Neptune"
+]
+
+top_players = [("Anna", 9), ("David", 8), ("Lilit", 7), ("Aram", 6), ("Seda", 5)]
+
+def play_single(q):
+    parts=q.split("?")
+    question=parts[0]
+    answers=parts[1].split(",")
+    correct=answers[0]
+    random.shuffle(answers)
+    while True:
+        print("\n"+question+"?")
+        for i,a in enumerate(answers):
+            print(i+1,a)
+        choice=input("Answer or lifeline (50/audience/change): ")
+        if choice=="50" and lifelines["50"]:
+            answers=fifty_fifty(correct,answers)
+            lifelines["50"]=False
+        elif choice=="audience" and lifelines["audience"]:
+            ask_audience(correct)
+            lifelines["audience"]=False
+        elif choice=="change" and lifelines["change"]:
+            lifelines["change"]=False
+            return "change"
+        elif choice in ["1","2","3","4"]:
+            if answers[int(choice)-1]==correct:
+                print("Correct!")
+                return True
+            else:
+                print(f"Incorrect! {correct}")
+                return False
+        else:
+            print("Try again!")
+
+def fifty_fifty(correct,answers):
+    wrong=[i for i in answers if a!=correct]
+    new=random,sample(wrong,1)
+    new.append(correct)
+    random.shuffle(new)
+    return new
+
+def ask_audience(correct):
+    print("Audience thinks: ",correct)
+
+def change_question(current,remaining):
+    remaining.append(current)
+    new_q=random.choice(remaining)
+    remaining.remove(new_q)
+    return new_q
+
+def play_game():
+    name=input("Input your name:")
+    remaining=questions.copy()
+    score=0
+    count=0
+    lifelines={"50":True,"audience":True,"change":True}
+    while count<10 and len(remaining)>0:
+        q=random.choice(remaining)
+        remaining.remove(q)
+        result=play_single(q)
+        if result=="change":
+            q=change_question(q,lifelines)
+        if result==True:
+            score+=1
+        count+=1
+    print(f"\n {name}, Score:{score}/10")
+    top_players.append((name,score))
+    top_players.sort(key=lambda x: x[1], reverse=True)
+    if len(top_players)>5:
+        top_players.pop()
+    print("Top players: ")
+    for p in top_players:
+        print(p)
+play_game()
+
+
