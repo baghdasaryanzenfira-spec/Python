@@ -21,23 +21,47 @@ questions = [
     "What is the square root of 16?4,2,8,6",
     "Which planet is known as the Red Planet?Mars,Earth,Saturn,Neptune"
 ]
-selected=random.sample(questions,10)
-score=0
-for q in selected:
-    parts=q.split("?")
+
+def parse_question(question):
+    parts=question.split("?")
     question=parts[0]
     answers=parts[1].split(",")
-    correct_answer=answers[0]
-    random.shuffle(answers)
-    print()
-    print(question+"?")
-    for i in range(4):
-        print(f"{i+1}.{answers[i]}")
-    player=int(input("Choose right answer: "))
-    if answers[player-1]==correct_answer:
-        print("Correct!!!")
-        score+=1
+    correct=answers[0]
+    return question,answers,correct
+
+def show_question(question):
+    print("\n"+question+"?")
+
+def show_answers(answers):
+    for i in range(len(answers)):
+        print(i+1,".",answers[i])
+
+def user_answer():
+    user=int(input("Your answer: "))
+    return user
+
+def check_answer(user,answers,correct):
+    if answers[user-1]==correct:
+        print("Correct!")
+        return 1
     else:
-        print(f"Wrong answer! {correct_answer}")
-print("Game over!...!")
-print("You answered",score,"/10")
+        print("Wrong! Correct answer is: ",correct)
+        return 0
+def ask_question(question):
+    question,answers,correct=parse_question(question)
+    random.shuffle(answers)
+    show_question(question)
+    show_answers(answers)
+    user=user_answer()
+    return check_answer(user,answers,correct)
+
+def quiz(questions):
+    score=0
+    random.shuffle(questions)
+    selected_questions=questions[:10]
+    for q in selected_questions:
+        score+=ask_question(q)
+    print("\n Game Over ")
+    print("Score: ", score,"/10")
+
+quiz(questions)

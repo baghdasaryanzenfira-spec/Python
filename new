@@ -1,0 +1,76 @@
+#!/usr/bin/python3
+#students=['John,Smith,IT,22',
+#          ' Jame,Scott,Econ,19',
+#          'Ann,Smith,IT,21']
+#def get_students_by_name(setlist,name):
+#    for student in setlist:
+#        if student.split(",")[0]==name:
+#            return create_student(student)
+#    return None
+#
+#def create_student(data):
+#    tmp={}
+#    n,s,f,y=data.split(",")
+#    tmp["name"]=n
+#    tmp["surname"]=s
+#    tmp["facult"]=f
+#    tmp["year"]=y
+#    return tmp
+#print(get_students_by_name(students,"Ann"))
+
+data = [
+    "SEUA,1960,2100,Gyumri",
+    "YSU,1919,20000,Yerevan",
+    "GITC,2005,1200,Gyumri",
+    "AUA,1991,2500,Yerevan",
+    "GSU,1934,4000,Gyumri",
+    "VANU,2006,1800,Vanadzor",
+    "NPUA,1933,10000,Yerevan",
+]
+def location(data_list):
+    result=[]
+    for i in data_list:
+        name,year,students,city=i.split(",")
+        tmp={}
+        tmp["name"]=name
+        tmp["year"]=year
+        tmp["students"]=students
+        tmp["city"]=city
+        result.append(tmp)
+    return result
+
+def by_city(data_list,city):
+    result=[]
+    for i in data_list:
+        if i["city"]==city:
+            result.append(i)
+    return result
+converted=location(data)
+print(by_city(converted,"Yerevan"))
+
+def by_name(data_list,name):
+    result=[]
+    for i in data_list:
+        if i["name"]==name:
+            result.append(i)
+    return(result)
+converted=location(data)
+print(by_name(converted,"YSU"))
+
+def by_year(data_list,year):
+    result=[]
+    for i in data_list:
+        if i["year"]==year:
+            result.append(i)
+    return result
+converted=location(data)
+print(by_year(converted,"1960"))
+
+def by_students(data_list,students):
+    result=[]
+    for i in data_list:
+        if i["students"]==students:
+            result.append(i)
+    return result
+converted=location(data)
+print(by_students(converted,"20000"))
