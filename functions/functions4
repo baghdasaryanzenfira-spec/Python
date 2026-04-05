@@ -1,0 +1,87 @@
+#!/usr/bin/python3
+def nsum(*args):
+    """Hashvum e tveri gumary"""
+    nl=0
+    for arg in args:
+        if isinstance(arg,(int,float)):
+            nl+=arg
+    return nl
+print(nsum(1,2,3,5,2))
+
+def nlen(*args):
+    """Toxeri qanak"""
+    nl=0
+    for arg in args:
+        if isinstance(arg,str):
+            nl+=1
+    return nl
+print(nlen("hello",1,2,3,"djcac","adcal"))
+
+def navg(*args):
+    """Mijin tvabanakan"""
+    nl=0
+    ml=0
+    for arg in args:
+        if isinstance(arg,(int,float)):
+            nl+=arg
+            ml+=1
+    if ml==0:
+        return 0
+    return nl/ml
+print(navg(1,8,3,5,"hacakk"))
+
+def action(z,y):
+    """Tvabanakan gorcoxutyunner"""
+    return f"z+y={z+y}, z-y={z-y}, zxy={z*y}, z/y={z//y} "
+print(action(4,2))
+
+def n_reverse(mstr):
+    """Reverse"""
+    if mstr=="":
+        return ""
+    return mstr[-1]+n_reverse(mstr[:-1])
+print(n_reverse("Hello my dear"))
+
+def n_reverse_nums(mstr,x,y):
+    """Indexneri mej ynkac entatox"""
+    return mstr[x:y]
+print(n_reverse_nums("hello asjcnajc akcnkascn",2,8))
+
+def n_len(text):
+    """Amenaerkar bar"""
+    words=text.split()
+    mmax=0
+    ml=""
+    for word in words:
+        if len(word)>mmax:
+            mmax=len(word)
+            ml=word
+    return ml
+print(n_len("Hello my dear Ararat"))
+
+def n_lenn(text):
+    """Amenaerkar bar"""
+    return max(text.split(),key=len)
+print(n_lenn("Hello from Python!"))
+
+def letter(text):
+    """Amenashat ogtagorcvac tari qanak"""
+    count={}
+    for i in text:
+        if i in count:
+            count[i]+=1
+        else:
+            count[i]=1
+    return max(count,key=count.get)
+print(letter("hello world"))
+
+def result(text):
+    """Amenaerkar bari amenashat ogt. tar"""
+    long_word=n_len(text)
+    return letter(long_word)
+print(result("Hello my deaaaaar"))
+
+def get_index(text,n):
+    """Skzbic ev verjic exac elementneri veradarc"""
+    return text[n-1],text[-n]
+print(get_index("hello my friend",5))
