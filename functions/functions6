@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+
+def sentences_lst(lst):
+    """Amenashat barerov naxadasutyuny"""
+    max_sentence=""
+    max_count=0
+    for sentence in lst:
+        words=sentence.split()
+        count=len(words)
+        
+        if count>max_count:
+            max_count=count
+            max_sentence=sentence
+    return max_sentence
+print(sentences_lst(["Long word","Hi guys","Hi from Italy dear!","Hello from Aremenia"]))
+
+def max_num(lst):
+    """Naxadasutyan amenamec tivy"""
+    ml=[]
+    for i in lst.split():
+        if i.isdigit():
+            ml.append(int(i))
+    return max(ml) if ml else None
+print(max_num("jacd acnln alc 2 qefkn ef 43 32 slcnl 5"))
+print(max_num("jacd acnln alc  qefkn ef slcnl "))
+
+def people_dict(people_list):
+    """Amenatarec mardy"""
+    return max(people_list, key=lambda d: list(d.values())[0])
+data=[{"Arsen":44},{"Varduhi":34},{"Davit":15},{"Zenfira":20,}]
+print(people_dict(data))
+
+def students_dict(students_list):
+    """Yst grade-i nvazman kargov"""
+    return sorted(students_list,key=lambda g: list(g.values())[1],reverse=True)
+data=[{"name":"Arsen","grade":44},{"name":"Varduhi","grade":90},{"name":"Davit","grade":67},{"name":"Zenfira","grade":91,}]
+print(students_dict(data))
+
+def university_dict(university_list):
+    """Amenaerkar anunn unecox hamalsarany"""
+    mmax=university_list[0]
+    for i in university_list[1:]:
+        if len(i["name"])>len(mmax["name"]):
+            mmax=i
+    return mmax        
+data = [
+    {"name": "Harvard University", "students": 21000},
+    {"name": "Massachusetts Institute of Technology", "students": 11500},
+    {"name": "Stanford University", "students": 17000},
+    {"name": "University of California, Berkeley", "students": 42000},
+    {"name": "California Institute of Technology", "students": 2200},
+    {"name": "University of Oxford", "students": 24000}
+]
+print(university_dict(data))
