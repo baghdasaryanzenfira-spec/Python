@@ -1,0 +1,99 @@
+#!/usr/bin/python3
+#humans = [
+#  {'name' : 'Anna',
+#   'surname': "Hovsepyan","faculty":"GHG", 'age': 30},
+#  {'name' : 'Shahen',
+#   'surname': "Sargsyan","faculty":"TT",
+#    'age': 34},
+#  {'name' : 'Narek',
+#    'surname': "Karapetyan","faculty":"TT",
+#    'age': 20},
+#  {'name' : 'Arman',
+#    'surname': "Gasparyan","faculty":"TTH",
+#    'age': 32}
+#]
+#def get_max_age_human(peoples):
+#    return max(peoples,key=lambda a: list(a.values())[1])
+# 
+#def get_student(n,f,g):
+#    tmp={}
+#    tmp["name"]=n
+#    tmp["faculty"]=f
+#    tmp["grade"]=g
+#    return tmp
+#
+#def collect_student_data():
+#  ml = []
+#  while True:
+#    st = input("If you want to stop type stop:")
+#    if st.lower() == "stop":
+#      return ml
+#    name = input("Enter name: ")
+#    faculty = input("Enter faculty: ")
+#    grade = int(input("Enter grade: "))
+#    ml.append(get_student(name, faculty, grade))
+#
+#
+#def sort_students_by_faculty(stlist, fname):
+#  tmp = [st for st in stlist if st['faculty'] == fname]
+#  tmp.sort(key = lambda x: x['grade'])
+#  return tmp
+#
+#students = collect_student_data()
+#fname = input("Enter faculty for filtration: ")
+#print(sort_students_by_faculty(students, fname))
+#
+user = {
+        'user1':'passwd1',
+        'user2':'passwd2',
+        'user3':'passwd3'
+        }
+
+def login(user):
+    attempts=3
+    while attempts>0:
+        username = input("Enter your username:")
+        if not user.get(username):
+            print("Wrong username")
+            ans=input("User not found. Do you want to register?(yes/no)")
+            if ans.lower()=="yes":
+                return register(user)
+            attempts-=1
+            if attempts==0:
+                print("No more attempts left.")
+                return False
+            continue
+        passwd=input("Enter your password: ")
+        if user[username] == passwd:
+            return False
+        else:
+            attempts-=1
+            print(f"Wrong password. {attempts} attempts left.")
+    print("Access denied. Too many failed attempts.")
+    return False
+
+def register(user):
+    while True:
+        username = input("Enter your username:")
+        if  user.get(username):
+            continue
+        else:
+            break
+    passwd = input("Enter your password:")
+    passw2 = input("repeat your password:")
+    if passwd != passwd:
+        print("wrong password")
+        return False
+    else:
+        user[username] = passwd
+    return True
+
+def logreg(user):
+    log = input("you want log in or register (log/reg):")
+    if log == "log":
+        if login(user) == True:
+            print("Hello")
+    elif log == "reg":
+        if register(user) == True:
+            print("Hello new user")
+logreg(user)

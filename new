@@ -18,59 +18,77 @@
 #    return tmp
 #print(get_students_by_name(students,"Ann"))
 
-data = [
-    "SEUA,1960,2100,Gyumri",
-    "YSU,1919,20000,Yerevan",
-    "GITC,2005,1200,Gyumri",
-    "AUA,1991,2500,Yerevan",
-    "GSU,1934,4000,Gyumri",
-    "VANU,2006,1800,Vanadzor",
-    "NPUA,1933,10000,Yerevan",
-]
-def location(data_list):
-    result=[]
-    for i in data_list:
-        name,year,students,city=i.split(",")
-        tmp={}
-        tmp["name"]=name
-        tmp["year"]=year
-        tmp["students"]=students
-        tmp["city"]=city
-        result.append(tmp)
-    return result
+#data = [
+#    "SEUA,1960,2100,Gyumri",
+#    "YSU,1919,20000,Yerevan",
+#    "GITC,2005,1200,Gyumri",
+#    "AUA,1991,2500,Yerevan",
+#    "GSU,1934,4000,Gyumri",
+#    "VANU,2006,1800,Vanadzor",
+#    "NPUA,1933,10000,Yerevan",
+#]
+#def location(data_list):
+#    result=[]
+#    for i in data_list:
+#        name,year,students,city=i.split(",")
+#        tmp={}
+#        tmp["name"]=name
+#        tmp["year"]=year
+#        tmp["students"]=students
+#        tmp["city"]=city
+#        result.append(tmp)
+#    return result
+#
+#def by_city(data_list,city):
+#    result=[]
+#    for i in data_list:
+#        if i["city"]==city:
+#            result.append(i)
+#    return result
+#converted=location(data)
+#print(by_city(converted,"Yerevan"))
+#
+#def by_name(data_list,name):
+#    result=[]
+#    for i in data_list:
+#        if i["name"]==name:
+#            result.append(i)
+#    return(result)
+#converted=location(data)
+#print(by_name(converted,"YSU"))
+#
+#def by_year(data_list,year):
+#    result=[]
+#    for i in data_list:
+#        if i["year"]==year:
+#            result.append(i)
+#    return result
+#converted=location(data)
+#print(by_year(converted,"1960"))
+#
+#def by_students(data_list,students):
+#    result=[]
+#    for i in data_list:
+#        if i["students"]==students:
+#            result.append(i)
+#    return result
+#converted=location(data)
+#print(by_students(converted,"20000"))
 
-def by_city(data_list,city):
-    result=[]
-    for i in data_list:
-        if i["city"]==city:
-            result.append(i)
-    return result
-converted=location(data)
-print(by_city(converted,"Yerevan"))
+#n=int(input("Enter a number: "))
+#ml=0
+#for i in range(0,n+1):
+#    ml+=i
+#print(ml)
+#
+#def msum(n):
+#    if n==0:
+#        return 0
+#    return n+msum(n-1)
+#print(msum(4))
 
-def by_name(data_list,name):
-    result=[]
-    for i in data_list:
-        if i["name"]==name:
-            result.append(i)
-    return(result)
-converted=location(data)
-print(by_name(converted,"YSU"))
-
-def by_year(data_list,year):
-    result=[]
-    for i in data_list:
-        if i["year"]==year:
-            result.append(i)
-    return result
-converted=location(data)
-print(by_year(converted,"1960"))
-
-def by_students(data_list,students):
-    result=[]
-    for i in data_list:
-        if i["students"]==students:
-            result.append(i)
-    return result
-converted=location(data)
-print(by_students(converted,"20000"))
+def n_reverse(mstr):
+    if mstr=="":
+        return ""
+    return mstr[-1]+n_reverse(mstr[:-1])
+print(n_reverse("hello"))

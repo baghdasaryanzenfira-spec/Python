@@ -1,0 +1,5 @@
+Anna,9
+Davit,8
+Aram,8
+zenfira,8
+Aida,7

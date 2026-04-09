@@ -1,0 +1,144 @@
+#!/usr/bin/python3
+import random
+
+questions_file = "questions.txt"
+players_file = "top_players.txt"
+
+def load_questions():
+    try:
+        with open(questions_file, "r") as f:
+            return [line.strip() for line in f if line.strip()]
+    except FileNotFoundError:
+        return []
+
+def save_question(q):
+    with open(questions_file, "a") as f:
+        f.write(q + "\n")
+
+def load_players():
+    players = []
+    try:
+        with open(players_file, "r") as f:
+            for line in f:
+                name, score = line.strip().split(",")
+                players.append((name, int(score)))
+    except FileNotFoundError:
+        pass
+    return players
+
+def save_players(players):
+    with open(players_file, "w") as f:
+        for name, score in players:
+            f.write(f"{name},{score}\n")
+
+def add_question():
+    question = input("Mutqagreq harcy: ")
+    correct = input("Chisht patasxan: ")
+    wrong1 = input("Sxal patasxan 1: ")
+    wrong2 = input("Sxal patasxan 2: ")
+    wrong3 = input("Sxal patasxan 3: ")
+    line = f"{question}?{correct},{wrong1},{wrong2},{wrong3}"
+    save_question(line)
+    print("Harcy avelacvec!")
+
+def fifty_fifty(correct, answers):
+    wrong = [a for a in answers if a != correct]
+    new = random.sample(wrong, 1)
+    new.append(correct)
+    random.shuffle(new)
+    return new
+
+def ask_audience(correct):
+    print("Audience thinks:", correct)
+
+def change_question(current, remaining):
+    if not remaining:
+        return current
+    remaining.append(current)
+    new_q = random.choice(remaining)
+    remaining.remove(new_q)
+    return new_q
+
+def play_single(q, lifelines):
+    parts = q.split("?")
+    question = parts[0]
+    answers = parts[1].split(",")
+    correct = answers[0]
+    random.shuffle(answers)
+
+    while True:
+        print("\n" + question + "?")
+        for i, a in enumerate(answers):
+            print(f"{i+1}." , a)
+
+        choice = input("Answer or lifeline (50/audience/change): ")
+
+        if choice == "50" and lifelines["50"]:
+            answers = fifty_fifty(correct, answers)
+            lifelines["50"] = False
+        elif choice == "audience" and lifelines["audience"]:
+            ask_audience(correct)
+            lifelines["audience"] = False
+        elif choice == "change" and lifelines["change"]:
+            lifelines["change"] = False
+            return "change"
+        elif choice in ["1", "2", "3", "4"]:
+            if answers[int(choice) - 1] == correct:
+                print("Correct!")
+                return True
+            else:
+                print(f"Incorrect! {correct}")
+                return False
+        else:
+            print("Try again!")
+
+def play_game():
+    name = input("Input your name: ")
+    remaining = questions.copy()
+    score = 0
+    count = 0
+    lifelines = {"50": True, "audience": True, "change": True}
+
+    while count < 10 and len(remaining) > 0:
+        q = random.choice(remaining)
+        remaining.remove(q)
+
+        result = play_single(q, lifelines)
+
+        if result == "change":
+            q = change_question(q, remaining)
+            result = play_single(q, lifelines)
+
+        if result is True:
+            score += 1
+
+        count += 1
+
+    print(f"\n{name}, Score: {score}/10")
+
+    top_players.append((name, score))
+    top_players.sort(key=lambda x: x[1], reverse=True)
+
+    if len(top_players) > 5:
+        top_players.pop()
+
+    save_players(top_players)
+
+    print("Top players:")
+    for p in top_players:
+        print(p)
+
+def main():
+    choice = input("Yntrir` Xaxal(1)/Harc avelcnel(2): ")
+    if choice == "1":
+        play_game()
+    elif choice == "2":
+        add_question()
+    else:
+        print("Sxal yntrutyun!!!")
+
+questions = load_questions()
+top_players = load_players()
+
+if __name__ == "__main__":
+    main()
