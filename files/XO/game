@@ -1,0 +1,95 @@
+#!/usr/bin/python3
+def print_board(board):
+    """Tpum e xaxataxtaky"""
+    for row in board:
+        print("|".join(row))
+        print("-" * 5)
+
+def check_winner(board, symbol):
+    """Stugum e ka haxtox"""
+    for row in board:
+        if all(cell == symbol for cell in row):
+            return True
+    for col in range(3):
+        if all(board[row][col] == symbol for row in range(3)):
+            return True
+    if all(board[i][i] == symbol for i in range(3)):
+        return True
+    if all(board[i][2 - i] == symbol for i in range(3)):
+        return True
+    return False
+
+def is_full(board):
+    """Stugum e dashty lcvac e"""
+    for row in board:
+        if " " in row:
+            return False
+    return True
+
+
+def save_board(filename, board):
+    """Pahpanum e file-um"""
+    with open(filename, "a", encoding="utf-8") as f:
+        for row in board:
+            f.write("|".join(row) + "\n")
+        f.write("-" * 5 + "\n")
+
+
+def save_history(player1, player2, score1, score2):
+    """pahpanum e history.txt-um"""
+    with open("history.txt", "a", encoding="utf-8") as f:
+        f.write(f"{player1} - {player2}: {score1} - {score2}\n")
+player1 = input("Player 1: ")
+player2 = input("Player 2: ")
+
+board = [[" " for _ in range(3)] for _ in range(3)]
+
+current_player = player1
+symbol = "X"
+
+filename = f"{player1}_{player2}.txt"
+
+
+while True:
+    print_board(board)
+
+    try:
+        row = int(input(f"{current_player}, mutqagrir toxy (1-3): "))-1
+        col = int(input(f"{current_player}, mutqagrir syuny (1-3): "))-1
+    except ValueError:
+        print("mutqagrir tiv!")
+        continue
+
+    if row not in range(3) or col not in range(3):
+        print("mutqagrir 1-3!")
+        continue
+
+    if board[row][col] != " ":
+        print("Zbaxvac e, noric pordzir:")
+        continue
+
+    board[row][col] = symbol
+
+    save_board(filename, board)
+
+    if check_winner(board, symbol):
+        print_board(board)
+        print(f"Haxtec {current_player}")
+
+        if current_player == player1:
+            save_history(player1, player2, 1, 0)
+        else:
+            save_history(player1, player2, 0, 1)
+        break
+    if is_full(board):
+        print_board(board)
+        print("Voch voqi")
+        save_history(player1, player2, 0.5, 0.5)
+        break
+
+    if current_player == player1:
+        current_player = player2
+        symbol = "O"
+    else:
+        current_player = player1
+        symbol = "X"
