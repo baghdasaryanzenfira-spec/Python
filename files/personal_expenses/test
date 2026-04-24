@@ -1,0 +1,98 @@
+#!/usr/bin/python3
+import json
+import os
+from datetime import datetime
+
+FILE_NAME = "expenses.json"
+
+def load_expenses():
+    if not os.path.exists(FILE_NAME):
+        return []
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def save_expenses(expenses):
+    with open(FILE_NAME, "w", encoding="utf-8") as f:
+        json.dump(expenses, f, indent=4)
+
+def add_expense(expenses):
+    amount = float(input("Mutqagreq gumary: "))
+    category = input("Category: ")
+    description = input("Description: ")
+    date = input("Amsativ (YYYY-MM-DD), ete datark e aysor: ")
+    if not date:
+        date = datetime.now().strftime("%Y-%m-%d")
+    expense = {
+        "amount": amount,
+        "category": category,
+        "description": description,
+        "date": date
+    }
+    expenses.append(expense)
+    print("Caxsy avelacvac e! ")
+
+def show_expenses(expenses):
+    if not expenses:
+        print("Caxser chkan!")
+        return
+    for i, e in enumerate(expenses, start=1):
+        print(f"{i}. {e['date']} | {e['category']} | {e['amount']} dram | {e['description']}")
+
+def calculate_total(expenses):
+    return sum(e["amount"] for e in expenses)
+
+def show_summary(expenses):
+    if not expenses:
+        print("Tvyalner chkan:")
+        return
+    summary = {}
+    for e in expenses:
+        cat = e["category"]
+        summary[cat] = summary.get(cat, 0) + e["amount"]
+
+    print("\nAmpopum yst kategoriayi: ")
+    for cat, total in summary.items():
+        print(f"{cat}: {total} dram")
+
+    print(f"Yndhanur caxs: {calculate_total(expenses)} dram")
+
+
+def delete_expense(expenses):
+    show_expenses(expenses)
+    try:
+        index = int(input("Jnjvox caxsi hamary: "))
+        if 1 <= index <= len(expenses):
+            removed = expenses.pop(index - 1)
+            print("Jnjvec:", removed)
+        else:
+            print("Sxal index!")
+    except ValueError:
+        print("Sxal mutqagrum!")
+
+def menu():
+    expenses = load_expenses()
+
+    while True:
+        print("\n===== Caxseri hamakarg =====")
+        print("1. Avelacnel caxs: ")
+        print("2. Bolor caxsery: ")
+        print("3. Ampopum: ")
+        print("4. Jnjel caxsy:")
+        print("5. PAhpanel eb durs gal:")
+        choice = input("Yntreq tarberak: ")
+        if choice == "1":
+            add_expense(expenses)
+        elif choice == "2":
+            show_expenses(expenses)
+        elif choice == "3":
+            show_summary(expenses)
+        elif choice == "4":
+            delete_expense(expenses)
+        elif choice == "5":
+            save_expenses(expenses)
+            print("Pahpanvac e, durs gal.")
+            break
+        else:
+            print("Sxal yntrutyun!!!")
+if __name__ == "__main__":
+    menu()
