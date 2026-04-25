@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "zenfira",
+        "number": "093190810",
+        "email": "zenfira.b00@mail.ru",
+        "address": "Gyumri"
+    },
+    {
+        "id": 2,
+        "name": "davit",
+        "number": "095222727",
+        "email": "davit.galstyan@mail.ru",
+        "address": "Gyumri"
+    },
+    {
+        "id": 3,
+        "name": "Aida",
+        "number": "090239382",
+        "email": "ksdkdkjd",
+        "address": "Paris"
+    }
+]

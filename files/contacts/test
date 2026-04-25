@@ -1,0 +1,141 @@
+#!/usr/bin/python3
+import json
+import os
+
+FILE_NAME="contacts.json"
+
+def load_contact():
+    if not os.path.exists(FILE_NAME):
+        return []
+    with open(FILE_NAME,"r",encoding="utf-8") as f:
+        return json.load(f)
+
+def save_contact(contacts):
+    with open(FILE_NAME,"w",encoding="utf-8") as f:
+        json.dump(contacts,f,indent=4)
+    print("Saved!")
+def fix_ids(contacts):
+    for i,c in enumerate(contacts,1):
+        if "id" not in c:
+            c["id"]=i
+
+def contact_id(contacts):
+    if not contacts:
+        return 1
+    return max(c["id"] for c in contacts)+1
+
+def add_contact(contacts):
+    name=input("Name: ")
+    number=input("Number: ")
+    if not number.isdigit():
+        print("Invalid number!")
+        return
+    email=input("Email: ")
+    address=input("Address: ")
+    contact={"id":contact_id(contacts),
+             "name":name,
+              "number":number,
+              "email":email,
+              "address":address
+              }
+    contacts.append(contact)
+    print("Contact added! ")
+
+def search_name(contacts):
+    name=input("Contact name: ")
+    found=False
+    for c in contacts:
+        if name in c["name"].lower():
+            print_contact(c)
+            found=True
+    if not found:
+        print("Not found!")
+
+def print_contact(c):
+    print(f"{c.get('id')} {c.get('name')} | {c.get('number')} | {c.get('email')} | {c.get('address')}")
+
+def view_contact(contacts):
+    if not contacts:
+        print("No contacts available!")
+        return
+    for c in contacts:
+        print_contact(c)
+
+def edit_contact(contacts):
+    view_contact(contacts)
+    try:
+        cid=int(input("Enter ID to edit: "))
+    except:
+        print("Invalid input!")
+        return
+    for c in contacts:
+        if c["id"]==cid:
+            c["name"]=input(f"New name ({c['name']}): " or c["name"])
+            c["number"]=input(f"New number ({c['number']}): " or c["number"])
+            c["email"]=input(f"New email ({c['email']}): " or c["email"])
+            c["address"]=input(f"New address ({c['address']}): " or c["address"])
+            print("Updated!")
+            return
+    print("ID not found!")
+
+def delete_contact(contacts):
+    view_contact(contacts)
+    try:
+        cid=int(input("Enter ID to delete: "))
+    except:
+        print("Invalid input!")
+        return
+    for c in contacts:
+        if c["id"]==cid:
+            contacts.remove(c)
+            print("Deleted!")
+            return
+    print("ID not found!")
+
+def export_txt(contacts):
+    with open("contacts_report.txt","w",encoding="utf-8") as f:
+        for c in contacts:
+            f.write(f"{c['name']} | {c['number']} | {c['email']} | {c['address']}\n")
+    print("Exported!")
+
+
+def menu():
+    contacts=load_contact()
+    print("\n1.Add contact")
+    print("2.Search contact")
+    print("3.View contact")
+    print("4.Edit contact")
+    print("5.Delete contact")
+    print("6.Save")
+    print("7.Load")
+    print("8.Export TXT")
+    print("9.Exit")
+
+    while True:
+        choice=input("Choice: ")
+        if choice=="1":
+            add_contact(contacts)
+        elif choice=="2":
+            search_name(contacts)
+        elif choice=="3":
+            view_contact(contacts)
+        elif choice=="4":
+            edit_contact(contacts)
+        elif choice=="5":
+            delete_contact(contacts)
+        elif choice=="6":
+            save_contact(contacts)
+        elif choice=="7":
+            contacts=load_contact()
+            fix_ids(contacts)
+            print("Loaded!")
+        elif choice=="8":
+            export_txt(contacts)
+        elif choice=="9":
+            break
+        else:
+            print("Invalid choice!")
+
+
+if __name__=="__main__":
+    menu()
