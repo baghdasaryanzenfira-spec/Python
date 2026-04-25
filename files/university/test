@@ -1,0 +1,130 @@
+#!/usr/bin/python3
+import json
+import os
+
+FILE_NAME = "students.json"
+
+
+def load_students():
+    if not os.path.exists(FILE_NAME):
+        return []
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_students(students):
+    with open(FILE_NAME, "w", encoding="utf-8") as f:
+        json.dump(students, f, indent=4)
+
+def add_student(students):
+    name = input("Name: ")
+
+    for s in students:
+        if s["name"] == name:
+            print("Student already exists")
+            return
+
+    students.append({"name": name, "grades": {}})
+    print("Student added")
+
+
+def add_grade(students):
+    name = input("Student name: ")
+
+    for s in students:
+        if s["name"] == name:
+            subject = input("Subject: ")
+            try:
+                grade = float(input("Grade (0-100): "))
+                if 0 <= grade <= 100:
+                    s["grades"][subject] = grade
+                    print("Grade added")
+                else:
+                    print("Invalid grade")
+            except:
+                print("Enter a number")
+            return
+
+    print("Student not found")
+
+def view_student(students):
+    name = input("Student name: ")
+
+    for s in students:
+        if s["name"] == name:
+            print("Name:", s["name"])
+
+            total = 0
+            count = 0
+
+            for sub, gr in s["grades"].items():
+                print(sub, "-", gr)
+                total += gr
+                count += 1
+
+            if count > 0:
+                print("Average:", total / count)
+            else:
+                print("No grades")
+
+            return
+
+    print("Student not found")
+
+def calculate_average(students):
+    total = 0
+    count = 0
+
+    for s in students:
+        for gr in s["grades"].values():
+            total += gr
+            count += 1
+
+    if count > 0:
+        print("Class average:", total / count)
+    else:
+        print("No data")
+
+def menu():
+    students = load_students()
+
+    while True:
+        print("\n1. Add student")
+        print("2. Add grade")
+        print("3. View student")
+        print("4. Class average")
+        print("5. Save")
+        print("6. Load")
+        print("7. Exit")
+
+        choice = input("Choice: ")
+
+        if choice == "1":
+            add_student(students)
+
+        elif choice == "2":
+            add_grade(students)
+
+        elif choice == "3":
+            view_student(students)
+
+        elif choice == "4":
+            calculate_average(students)
+
+        elif choice == "5":
+            save_students(students)
+            print("Saved")
+
+        elif choice == "6":
+            students = load_students()
+            print("Loaded")
+
+        elif choice == "7":
+            break
+
+        else:
+            print("Invalid choice")
+
+
+if __name__ == "__main__":
+    menu()

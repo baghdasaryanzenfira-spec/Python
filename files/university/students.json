@@ -1,0 +1,15 @@
+[
+    {
+        "name": "zenf",
+        "grades": {
+            "math": 89.0,
+            "programmin": 55.0
+        }
+    },
+    {
+        "name": "alaa",
+        "grades": {
+            "math": 78.0
+        }
+    }
+]
