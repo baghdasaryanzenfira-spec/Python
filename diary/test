@@ -1,0 +1,154 @@
+#!/usr/bin/python3
+import json
+import os
+from datetime import datetime
+
+FILE_NAME="diary.json"
+
+def load_entries():
+    if not os.path.exists(FILE_NAME):
+        return []
+    try:
+        with open(FILE_NAME,"r",encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return []
+
+def save_entries(entries):
+    with open(FILE_NAME,"w",encoding="utf-8") as f:
+        json.dump(entries,f,indent=4)
+    print("Saved!")
+
+def add_entry(entries):
+    text=input("Your text: ")
+    mood=input("Mood (1-5) kam datark: ")
+    entry={"date":datetime.now().strftime("%Y-%m-%d  %H:%M"),
+           "text":text,
+           "mood":int(mood) if mood.isdigit() else None
+           }
+    entries.append(entry)
+    print("Text saved!")
+
+def view_entries(entries):
+    if not entries:
+        print("No entries available!")
+        return
+    for e in entries:
+        print_entry(e)
+
+def print_entry(e):
+    print(f"{e.get('date')} | {e.get('text')} | {e.get('mood')}")
+
+def search_entries(entries):
+    query=input("Enter Word or Datetime: ").lower()
+    result=[]
+    for e in entries:
+        if query in e["text"].lower() or query in e["date"]:
+            result.append(e)
+    if not result:
+        print("None!")
+        return
+    for e in result:
+        print(f"\n {e['date']}")
+        print(e["text"])
+
+def show_stats(entries):
+    if not entries:
+        print("No data!")
+        return
+    monthly={}
+    moods=[]
+    for e in entries:
+        month=e["date"][:7]
+        monthly[month]=monthly.get(month,0)+1
+
+        if e["mood"]:
+            moods.append(e["mood"])
+    print("\n Monthly: ")
+    for m,count in monthly.items():
+        print(f"{m}:{count} entry ")
+    if moods:
+        avg_mood=sum(moods)/len(moods)
+        print(f"\n Avg mood: {round(avg_mood,2)}")
+
+def edit_entry(entries):
+    for e in entries:
+        print_entry(e)
+    date=input("Enter date: ")
+    for e in entries:
+        if date in e["date"]:
+            print("Data founded!")
+            print(e["text"])
+            
+            new_text=input("New text(Enter` old text): ")
+            if new_text:
+                e["text"]=new_text
+            save_entries(entries)
+            print("Updated!")
+            return
+    print("Not found!")
+
+def delete_entry(entries):
+    for e in entries:
+        print_entry(e)
+    date=input("Enter date: ")
+    for e in entries:
+        if date in e["date"]:
+            entries.remove(e)
+            save_entries(entries)
+            print("Data deleted!")
+            return
+    print("Not found!")
+
+def export_txt(entries):
+    with open("diary_export.txt","w",encoding="utf-8") as f:
+        for e in entries:
+            f.write(f"{e['date']}\n")
+            f.write(e['text']+"\n")
+            f.write("-"*30+"\n")
+    print("Diary export")
+
+def menu():
+    entries=load_entries()
+    while True:
+        print("\n=== Diary ===")
+        print("1. Add entry")
+        print("2. View entries")
+        print("3. Search word or date")
+        print("4. Show stats")
+        print("5. Edit entry")
+        print("6. Delete entry")
+        print("7. Saved")
+        print("8. Load")
+        print("9. Diary export")
+        print("10. Exit")
+
+
+        choice=input("Choose: ")
+        if choice=="1":
+            add_entry(entries)
+        elif choice=="2":
+            view_entries(entries)
+        elif choice=="3":
+            search_entries(entries)
+        elif choice=="4":
+            show_stats(entries)
+        elif choice=="5":
+            edit_entry(entries)
+        elif choice=="6":
+            delete_entry(entries)
+        elif choice=="7":
+            save_entries(entries)
+        elif choice=="8":
+            entries=load_entries()
+            print("Loaded!")
+        elif choice=="9":
+            export_txt(entries)
+        elif choice=="10":
+            break
+        else:
+            print("Invalid!")
+            
+
+if __name__=="__main__":
+    menu()
