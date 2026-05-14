@@ -1,0 +1,51 @@
+#!/usr/bin/python3
+from sys import deactivate_stack_trampoline
+from typing import ParamSpec
+from requests.sessions import preferred_clock
+from config import API_KEY
+import requests
+import argparse
+
+parser=argparse.ArgumentParser(description="CLI exanaki Kanxatesman cragir!")
+parser.add_argument("city",help="Qaxaqi anuny")
+parser.add_argument("parameter",nargs="?",help="konkret parameter(temperature,humidity,pressure,wind,description,feels_like,visibility)")
+args=parser.parse_args()
+city=args.city
+parameter=args.parameter
+
+url = (
+    f"https://api.openweathermap.org/data/2.5/weather?"
+    f"q={city}&appid={API_KEY}&units=metric&lang=hy"
+)
+response=requests.get(url)
+if response.status_code !=200:
+    print("Incorrect,city not found!")
+    exit()
+
+data=response.json()
+weather_data={
+        "temperature":f"{data['main']['temp']} C",
+        "feels_like":f"{data['main']['feels_like']} C",
+        "humidity":f"{data['main']['humidity']} %",
+        "pressure":f"{data['main']['pressure']} hPa",
+        "wind":f"{data['wind']['speed']} m/v",
+        "description": data['weather'][0]['description'],
+        "visibility":f"{data.get('visibility','N/A')} m"
+        }
+
+if not parameter:
+    print(f"\nCity: {city}")
+    print(f"Temperature: {weather_data['temperature']}")
+    print(f"Feels like: {weather_data['feels_like']}")
+    print(f"Humidity: {weather_data['humidity']}")
+    print(f"Pressure: {weather_data['pressure']}")
+    print(f"Weather data: {weather_data['wind']}")
+    print(f"Description: {weather_data['description']}")
+    print(f"Visibility: {weather_data['visibility']}")
+else:
+    if parameter in weather_data:
+        print(f"\nCity: {city}")
+        print(f"{parameter}:{weather_data[parameter]}")
+
+    else:
+        print("Incorrect!")
