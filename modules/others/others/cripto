@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+import requests
+
+url = "https://api.coingecko.com/api/v3/coins/markets"
+
+params = {
+    "vs_currency": "usd",
+    "order": "market_cap_desc",
+    "per_page": 20,
+    "page": 1,
+    "sparkline": "false"
+}
+
+response = requests.get(url, params=params)
+data = response.json()
+
+
+def show(data):
+    print("\nName\tSymbol\tPrice\tMarketCap\tVolume\t24h%")
+    print("-" * 90)
+
+    for coin in data:
+        print(
+            coin["name"], "\t",
+            coin["symbol"].upper(), "\t",
+            coin["current_price"], "\t",
+            coin["market_cap"], "\t",
+            coin["total_volume"], "\t",
+            coin["price_change_percentage_24h"]
+        )
+
+
+# սկզբնական ցուցադրում
+show(data)
+
+while True:
+    print("\n1 - search by name")
+    print("2 - filter by price > X")
+    print("0 - exit")
+
+    choice = input("Choose: ")
+
+    if choice == "1":
+        s = input("Enter name: ").lower()
+        filtered = []
+
+        for coin in data:
+            if s in coin["name"].lower():
+                filtered.append(coin)
+
+        show(filtered)
+
+    elif choice == "2":
+        x = float(input("Price > "))
+
+        filtered = []
+
+        for coin in data:
+            if coin["current_price"] > x:
+                filtered.append(coin)
+
+        show(filtered)
+
+    elif choice == "0":
+        break

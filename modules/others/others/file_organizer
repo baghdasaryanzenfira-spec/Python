@@ -1,0 +1,64 @@
+#!/usr/bin/python3
+import os
+import argparse
+
+CATEGORIES = {
+    "documents": [".doc", ".docx", ".txt", ".xls", ".xlsx"],
+    "pdfs": [".pdf"],
+    "images": [".jpg", ".jpeg", ".png", ".gif"],
+    "archives": [".zip", ".rar", ".tar"]
+}
+
+FOLDERS = ["documents", "pdfs", "images", "archives", "others"]
+
+
+def get_category(extension):
+    extension = extension.lower()
+    for category, exts in CATEGORIES.items():
+        if extension in exts:
+            return category
+    return "others"
+
+
+def organize_files(path):
+    report = {
+        "documents": 0,
+        "pdfs": 0,
+        "images": 0,
+        "archives": 0,
+        "others": 0
+    }
+
+    for folder in FOLDERS:
+        folder_path = os.path.join(path, folder)
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+
+    for item in os.listdir(path):
+        item_path = os.path.join(path, item)
+
+        if os.path.isdir(item_path):
+            continue
+
+        _,  ext = os.path.splitext(item)
+        category = get_category(ext)
+
+        destination = os.path.join(path, category, item)
+
+        try:
+            os.rename(item_path, destination)
+            report[category] += 1
+        except Exception as e:
+            print(f"Chhajoxvec texapoxel {item}: {e}")
+
+    print("\nTexapoxvac fayler․")
+    for key, value in report.items():
+        print(f"- {value} {key}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="File Organizer by Type")
+    parser.add_argument("path", help="Source folder path")
+
+    args = parser.parse_args()
+    organize_files(args.path)
