@@ -30,7 +30,6 @@ def show(data):
         )
 
 
-# սկզբնական ցուցադրում
 show(data)
 
 while True:
