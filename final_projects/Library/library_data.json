@@ -1,0 +1,42 @@
+{
+    "books": [
+        {
+            "title": "Harry Potter",
+            "author": "Rouling",
+            "isbn": "93773",
+            "copies": 3,
+            "available": 3
+        },
+        {
+            "title": "uy",
+            "author": "hgjhg",
+            "isbn": "89",
+            "copies": 3,
+            "available": 3
+        },
+        {
+            "title": "jdk",
+            "author": "kada",
+            "isbn": "12",
+            "copies": 1,
+            "available": 1
+        }
+    ],
+    "members": [
+        {
+            "member_id": "M1",
+            "name": "Alice",
+            "borrowed": {},
+            "history": [
+                "Borrowed Harry Potter",
+                "Returned Harry Potter | Fine 0"
+            ]
+        },
+        {
+            "member_id": "87",
+            "name": "zenf",
+            "borrowed": {},
+            "history": []
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+from models.book import Book
+
+
+class Fiction(Book):
+    def __init__(self,title,author,isbn,genre,copies=1):
+        super().__init__(title,author,isbn,copies)
+        self.genre=genre
+
+class NonFictionBook(Book):
+    def __init__(self,title,author,isbn,subject,copies=1):
+        super().__init__(title,author,isbn,copies)
+        self.subject=subject
+
+
