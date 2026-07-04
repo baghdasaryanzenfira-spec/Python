@@ -106,7 +106,6 @@ class Library:
             return "Success"
         return "Unavailable"
 
-    # -------- return --------
     def return_book(self, member_id, isbn):
         member = next((m for m in self.members if m.member_id == member_id), None)
 
@@ -117,7 +116,6 @@ class Library:
         self.save_data()
         return f"Returned | Fine: {fine}"
 
-    # -------- stats --------
     def stats(self):
         return {
             "books": len(self.books),
