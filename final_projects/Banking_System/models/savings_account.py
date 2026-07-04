@@ -1,21 +1,9 @@
-"""Savings account: no negative balance, enforced minimum, earns interest."""
-
 from __future__ import annotations
-
 from ..utils.exceptions import InsufficientFundsError, InvalidAmountError
 from ..utils.validators import validate_rate
 from .base_account import BankAccount
 
-
 class SavingsAccount(BankAccount):
-    """
-    Savings account: cannot go negative and must keep a minimum balance.
-
-    Overrides withdraw() to enforce the minimum-balance constraint, adds
-    interest application, and exposes a classmethod to change the interest
-    rate for *all* savings accounts at once.
-    """
-
     interest_rate: float = 0.04  # savings earns more than the base rate
 
     def __init__(
@@ -25,7 +13,6 @@ class SavingsAccount(BankAccount):
         balance: float = 0.0,
         minimum_balance: float = 100.0,
     ) -> None:
-        """Create a savings account with an enforced minimum balance."""
         if minimum_balance < 0:
             raise InvalidAmountError("Minimum balance cannot be negative.")
         if balance < minimum_balance:
@@ -37,7 +24,6 @@ class SavingsAccount(BankAccount):
         self.minimum_balance: float = float(minimum_balance)
 
     def withdraw(self, amount: float) -> float:
-        """Withdraw while keeping the balance at or above the minimum."""
         amount = self.validate_amount(amount)
         if self.balance - amount < self.minimum_balance:
             raise InsufficientFundsError(
@@ -49,7 +35,6 @@ class SavingsAccount(BankAccount):
         return self.balance
 
     def apply_interest(self) -> float:
-        """Add interest (using this class's rate) to the balance."""
         interest = self.balance * self.interest_rate
         self.balance += interest
         self._record(
@@ -60,12 +45,6 @@ class SavingsAccount(BankAccount):
 
     @classmethod
     def set_interest_rate(cls, new_rate: float) -> None:
-        """
-        Update the interest rate for every savings account simultaneously.
-
-        Because the rate lives on the class, changing it here affects all
-        existing and future SavingsAccount instances at once.
-        """
         cls.interest_rate = validate_rate(new_rate)
 
     def account_type(self) -> str:

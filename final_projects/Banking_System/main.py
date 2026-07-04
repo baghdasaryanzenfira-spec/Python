@@ -1,25 +1,11 @@
-"""
-Interactive command-line interface for the Banking System package.
-
-Run it as a module (recommended, from the ``final_projects`` directory)::
-
-    python -m Banking_System.main
-
-or directly::
-
-    python Banking_System/main.py
-"""
-
+#!/usr/bin/python3
 from __future__ import annotations
 
-# Support both "python -m Banking_System.main" (relative imports work) and
-# "python Banking_System/main.py" (no package context) by falling back to
-# absolute imports after fixing sys.path.
 try:
     from .models import CheckingAccount, LoanAccount, SavingsAccount
     from .services import Bank
     from .utils import BankingError
-except ImportError:  # pragma: no cover - direct-script execution fallback
+except ImportError: 
     import os
     import sys
 
@@ -30,7 +16,6 @@ except ImportError:  # pragma: no cover - direct-script execution fallback
 
 
 def _prompt_float(message: str) -> float:
-    """Prompt the user until they enter a valid number."""
     while True:
         raw = input(message).strip()
         try:
@@ -58,15 +43,10 @@ MENU = """
 
 
 def run_cli() -> None:
-    """Launch the interactive banking menu loop."""
     bank = Bank()
-    print(f"Welcome to {bank.name}!")
-
-    # Seed a couple of demo accounts so the CLI is testable immediately.
     try:
         bank.create_account("savings", "Alice", balance=500, minimum_balance=100)
         bank.create_account("checking", "Bob", balance=200)
-        print("(Two demo accounts were created: 1000=Alice savings, 1001=Bob checking)")
     except BankingError as exc:  # pragma: no cover - demo seeding
         print(f"Could not seed demo accounts: {exc}")
 
@@ -75,7 +55,7 @@ def run_cli() -> None:
         choice = input("Select an option: ").strip()
 
         try:
-            if choice == "1":  # Create account
+            if choice == "1":
                 print("Types: savings | checking | loan")
                 acc_type = input("  Account type: ").strip().lower()
                 name = input("  Holder name: ").strip()
@@ -91,32 +71,32 @@ def run_cli() -> None:
                 account = bank.create_account(acc_type, name, **kwargs)
                 print(f"  ✓ Created: {account}")
 
-            elif choice == "2":  # Deposit
+            elif choice == "2": 
                 num = input("  Account number: ").strip()
                 acc = bank.find_account(num)
                 amount = _prompt_float("  Amount to deposit: ")
                 acc.deposit(amount)
                 print(f"  ✓ New balance: {acc.get_balance():.2f}")
 
-            elif choice == "3":  # Withdraw
+            elif choice == "3":  
                 num = input("  Account number: ").strip()
                 acc = bank.find_account(num)
                 amount = _prompt_float("  Amount to withdraw: ")
                 acc.withdraw(amount)
                 print(f"  ✓ New balance: {acc.get_balance():.2f}")
 
-            elif choice == "4":  # Transfer
+            elif choice == "4":  
                 src = input("  From account number: ").strip()
                 dst = input("  To account number: ").strip()
                 amount = _prompt_float("  Amount to transfer: ")
                 bank.transfer(src, dst, amount)
                 print("  ✓ Transfer complete.")
 
-            elif choice == "5":  # View account
+            elif choice == "5": 
                 num = input("  Account number: ").strip()
                 print(f"  {bank.find_account(num)}")
 
-            elif choice == "6":  # History
+            elif choice == "6": 
                 num = input("  Account number: ").strip()
                 acc = bank.find_account(num)
                 if not acc.transaction_history:
@@ -124,19 +104,19 @@ def run_cli() -> None:
                 for entry in acc.transaction_history:
                     print(f"  {entry}")
 
-            elif choice == "7":  # Change interest rate
+            elif choice == "7": 
                 rate = _prompt_float("  New savings interest rate (e.g. 0.05 for 5%): ")
                 SavingsAccount.set_interest_rate(rate)
-                print(f"  ✓ All savings accounts now earn {rate:.2%}.")
+                print(f"All savings accounts now earn {rate:.2%}.")
 
-            elif choice == "8":  # Apply interest
+            elif choice == "8": 
                 num = input("  Account number: ").strip()
                 acc = bank.find_account(num)
                 if isinstance(acc, (SavingsAccount, LoanAccount)):
                     acc.apply_interest()
-                    print(f"  ✓ Interest applied. {acc}")
+                    print(f"Interest applied. {acc}")
                 else:
-                    print("  ! Interest only applies to savings or loan accounts.")
+                    print("Interest only applies to savings or loan accounts.")
 
             elif choice == "9":  # Statistics
                 stats = bank.statistics()
@@ -157,16 +137,16 @@ def run_cli() -> None:
                 break
 
             else:
-                print("  ! Invalid option, please try again.")
+                print("Invalid option, please try again.")
 
         except BankingError as exc:
             # All domain errors are caught here so the menu never crashes.
-            print(f"  ! Error: {exc}")
+            print(f"Error: {exc}")
         except EOFError:
             print("\nGoodbye!")
             break
         except Exception as exc:  # noqa: BLE001 - last-resort safety net
-            print(f"  ! Unexpected error: {exc}")
+            print(f"Unexpected error: {exc}")
 
 
 if __name__ == "__main__":

@@ -1,19 +1,7 @@
-"""Validation helpers shared across the banking system."""
-
 from __future__ import annotations
-
 from .exceptions import InvalidAmountError
 
-
 def validate_amount(amount: float) -> float:
-    """
-    Ensure ``amount`` is a positive, finite number and return it as float.
-
-    Raises
-    ------
-    InvalidAmountError
-        If the amount is not a number, is boolean, NaN/inf, or <= 0.
-    """
     if isinstance(amount, bool) or not isinstance(amount, (int, float)):
         raise InvalidAmountError("Amount must be a number.")
     amount = float(amount)
@@ -25,7 +13,6 @@ def validate_amount(amount: float) -> float:
 
 
 def validate_rate(rate: float) -> float:
-    """Ensure an interest rate is a non-negative number and return it as float."""
     if isinstance(rate, bool) or not isinstance(rate, (int, float)):
         raise InvalidAmountError("Interest rate must be a number.")
     if rate < 0:
