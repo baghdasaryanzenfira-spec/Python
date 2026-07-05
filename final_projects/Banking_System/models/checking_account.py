@@ -4,7 +4,7 @@ from .base_account import BankAccount
 
 
 class CheckingAccount(BankAccount):
-    interest_rate: float = 0.0  # checking accounts earn no interest
+    interest_rate: float = 0.0  
 
     def __init__(
         self,
