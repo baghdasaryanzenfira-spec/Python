@@ -41,5 +41,5 @@ class UndergraduateStudent(Student):
 
     def summary(self):
         base = super().summary()
-        honors = " ★ Honor Roll" if self.is_honor_roll() else ""
+        honors = "  Honor Roll" if self.is_honor_roll() else ""
         return f"{base} | major: {self.major}, year {self.year}{honors}"
