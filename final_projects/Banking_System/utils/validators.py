@@ -5,7 +5,7 @@ def validate_amount(amount: float) -> float:
     if isinstance(amount, bool) or not isinstance(amount, (int, float)):
         raise InvalidAmountError("Amount must be a number.")
     amount = float(amount)
-    if amount != amount or amount in (float("inf"), float("-inf")):  # NaN / inf
+    if amount != amount or amount in (float("inf"), float("-inf")):  
         raise InvalidAmountError("Amount must be a finite number.")
     if amount <= 0:
         raise InvalidAmountError("Amount must be greater than zero.")
