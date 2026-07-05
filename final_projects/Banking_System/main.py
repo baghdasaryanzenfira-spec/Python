@@ -118,7 +118,7 @@ def run_cli() -> None:
                 else:
                     print("Interest only applies to savings or loan accounts.")
 
-            elif choice == "9":  # Statistics
+            elif choice == "9":  
                 stats = bank.statistics()
                 print(f"  Bank: {stats['bank_name']}")
                 print(f"  Accounts: {stats['num_accounts']}")
@@ -126,7 +126,7 @@ def run_cli() -> None:
                 print(f"  Lifetime accounts opened: {stats['lifetime_accounts']}")
                 print(f"  Breakdown: {stats['by_type']}")
 
-            elif choice == "10":  # List all
+            elif choice == "10":  
                 if not bank.accounts:
                     print("  (No accounts yet.)")
                 for acc in bank.accounts.values():
@@ -140,12 +140,11 @@ def run_cli() -> None:
                 print("Invalid option, please try again.")
 
         except BankingError as exc:
-            # All domain errors are caught here so the menu never crashes.
             print(f"Error: {exc}")
         except EOFError:
             print("\nGoodbye!")
             break
-        except Exception as exc:  # noqa: BLE001 - last-resort safety net
+        except Exception as exc:  
             print(f"Unexpected error: {exc}")
 
 
