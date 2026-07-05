@@ -4,7 +4,7 @@ from ..utils.validators import validate_rate
 from .base_account import BankAccount
 
 class SavingsAccount(BankAccount):
-    interest_rate: float = 0.04  # savings earns more than the base rate
+    interest_rate: float = 0.04  
 
     def __init__(
         self,
