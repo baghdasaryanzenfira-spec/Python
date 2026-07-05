@@ -4,7 +4,7 @@ from .base_account import BankAccount
 
 
 class LoanAccount(BankAccount):
-    interest_rate: float = 0.09  # loans accrue the highest rate
+    interest_rate: float = 0.09  
 
     def __init__(
         self,
