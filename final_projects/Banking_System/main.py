@@ -69,28 +69,28 @@ def run_cli() -> None:
                 elif acc_type == "loan":
                     kwargs["loan_amount"] = _prompt_float("  Loan amount: ")
                 account = bank.create_account(acc_type, name, **kwargs)
-                print(f"  ✓ Created: {account}")
+                print(f"  Created: {account}")
 
             elif choice == "2": 
                 num = input("  Account number: ").strip()
                 acc = bank.find_account(num)
                 amount = _prompt_float("  Amount to deposit: ")
                 acc.deposit(amount)
-                print(f"  ✓ New balance: {acc.get_balance():.2f}")
+                print(f"  New balance: {acc.get_balance():.2f}")
 
             elif choice == "3":  
                 num = input("  Account number: ").strip()
                 acc = bank.find_account(num)
                 amount = _prompt_float("  Amount to withdraw: ")
                 acc.withdraw(amount)
-                print(f"  ✓ New balance: {acc.get_balance():.2f}")
+                print(f"  New balance: {acc.get_balance():.2f}")
 
             elif choice == "4":  
                 src = input("  From account number: ").strip()
                 dst = input("  To account number: ").strip()
                 amount = _prompt_float("  Amount to transfer: ")
                 bank.transfer(src, dst, amount)
-                print("  ✓ Transfer complete.")
+                print("  Transfer complete.")
 
             elif choice == "5": 
                 num = input("  Account number: ").strip()
