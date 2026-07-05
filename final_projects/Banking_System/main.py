@@ -47,7 +47,7 @@ def run_cli() -> None:
     try:
         bank.create_account("savings", "Alice", balance=500, minimum_balance=100)
         bank.create_account("checking", "Bob", balance=200)
-    except BankingError as exc:  # pragma: no cover - demo seeding
+    except BankingError as exc:  
         print(f"Could not seed demo accounts: {exc}")
 
     while True:
